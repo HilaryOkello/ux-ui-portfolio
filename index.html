@@ -49,15 +49,16 @@
         
         /* Header */
         header {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem;
+            padding: 5rem 2rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--light);
+            overflow: hidden;
         }
         /* Noise overlay */
         header::before {
@@ -90,7 +91,7 @@
             padding: 1rem 2rem;
         }
         
-        nav.scrolled .logo {
+        nav.scrolled {
             color: var(--dark);
         }
         
@@ -99,9 +100,13 @@
         }
         
         .logo {
-            font-size: 1.5rem;
+            line-height: 1.2rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--light);
+        }
+        .logo:hover {
+            text-decoration: none;
         }
         
         .nav-links {
@@ -161,7 +166,105 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             color: var(--secondary);
         }
-        
+
+        /* Bento Grid for Header */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto;
+            gap: 15px;
+            max-width: 800px;
+            margin: 2rem auto 0;
+            width: 100%;
+        }
+
+        .bento-item {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .bento-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .bento-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Grid layout positioning */
+        .bento-item.desktop {
+            aspect-ratio: 16/9; /* Desktop aspect ratio */
+        }
+
+        .bento-item.mobile {
+            aspect-ratio: 9/16; /* Mobile aspect ratio */
+        }
+
+        /* Create a more custom grid layout */
+        .bento-grid {
+            display: grid;
+            grid-template-areas: 
+                "desktop1 desktop1 mobile1 mobile2"
+                "mobile3  mobile4  desktop2 desktop2";
+            grid-auto-rows: auto;
+        }
+
+        .desktop-1 {
+            grid-area: desktop1;
+        }
+
+        .mobile-1 {
+            grid-area: mobile1;
+        }
+
+        .mobile-2 {
+            grid-area: mobile2;
+        }
+
+        .mobile-3 {
+            grid-area: mobile3;
+        }
+
+        .mobile-4 {
+            grid-area: mobile4;
+        }
+
+        .desktop-2 {
+            grid-area: desktop2;
+        }
+
+               /* Make bento grid responsive */
+               @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-areas:
+                    "desktop1 desktop1"
+                    "mobile1 mobile2"
+                    "mobile3 mobile4"
+                    "desktop2 desktop2";
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr); /* Add this line */
+                grid-template-areas:
+                    "desktop1 desktop1" /* Desktop takes full width */
+                    "mobile1 mobile2"
+                    "mobile3 mobile4"
+                    "desktop2 desktop2"; /* Desktop takes full width */
+            }
+        }
         /* Projects section */
         #projects {
             padding: 6rem 2rem;
@@ -417,7 +520,7 @@
 <body>
     <!-- Navigation -->
     <nav id="navbar">
-        <div class="logo">Hilary Okello</div>
+        <a href="/" class="logo">Hilary Okello</a>
         <div class="nav-links">
             <a href="#projects">Projects</a>
             <a href="#about">About</a>
@@ -431,6 +534,28 @@
             <h1>UX/UI Designer</h1>
             <p>Creating intuitive and engaging user experiences through thoughtful design and efficient development.</p>
             <a href="#projects" class="cta-btn">View My Work</a>
+            
+            <!-- Bento Grid Portfolio Preview -->
+            <div class="bento-grid">
+                <div class="bento-item desktop desktop-1">
+                    <img src="https://hilaryokello.github.io/ux-ui-portfolio/dashboard.png" alt="A bitcoin Dashboard">
+                </div>
+                <div class="bento-item mobile mobile-1">
+                    <img src="https://hilaryokello.github.io/ux-ui-portfolio/product.png" alt="Mobile UI Design 1">
+                </div>
+                <div class="bento-item mobile mobile-2">
+                    <img src="https://hilaryokello.github.io/ux-ui-portfolio/checkout.png" alt="Mobile UI Design 2">
+                </div>
+                <div class="bento-item mobile mobile-3">
+                    <img src="https://hilaryokello.github.io/ux-ui-portfolio/spotify.png" alt="Mobile UI Design 3">
+                </div>
+                <div class="bento-item mobile mobile-4">
+                    <img src="https://hilaryokello.github.io/ux-ui-portfolio/timer.png" alt="Mobile UI Design 4">
+                </div>
+                <div class="bento-item desktop desktop-2">
+                    <img src="https://hilaryokello.github.io/ux-ui-portfolio/flight.png" alt="Desktop UI Design 2">
+                </div>
+            </div>
         </div>
     </header>
     
